@@ -135,11 +135,11 @@ src/main/java/com/pooling/ledger/
 
 Built as a 6th Semester project at **Lakshmi Narain College of Technology Excellence**
 
-| Name | Role |
-|---|---|
+| Name            | Role |
+|-----------------|---|
 | Surya Dev Gupta | Backend — Spring Boot, JPA, REST API |
-| Eshant Likhitkar | Frontend — React, UI/UX, Tailwind |
-| Rishabh Singh | Database Design, Deployment, Testing |
+| Saksham Agarwal | Frontend — React, UI/UX, Tailwind |
+| Ritika Singh    | Database Design, Deployment, Testing |
 
 ---
 
