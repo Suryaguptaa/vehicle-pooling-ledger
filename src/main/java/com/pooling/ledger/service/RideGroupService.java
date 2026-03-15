@@ -52,6 +52,24 @@ public class RideGroupService {
         return "Resident " + resident.getName() + " added to group " + group.getName();
     }
 
+    public String joinByInviteCode(String inviteCode, Long residentId) {
+        RideGroup group = rideGroupRepository.findByInviteCode(inviteCode)
+                .orElseThrow(() -> new RuntimeException("Invalid invite code"));
+        Resident resident = residentRepository.findById(residentId)
+                .orElseThrow(() -> new RuntimeException("Resident not found with id: " + residentId));
+
+        boolean alreadyMember = group.getMembers().stream()
+                .anyMatch(m -> m.getId().equals(residentId));
+
+        if (alreadyMember) {
+            throw new RuntimeException("You are already a member of this group");
+        }
+
+        group.getMembers().add(resident);
+        rideGroupRepository.save(group);
+        return "Successfully joined group: " + group.getName();
+    }
+
     public List<ResidentDTO> getMembersWithBalances(Long groupId) {
         RideGroup group = rideGroupRepository.findById(groupId)
                 .orElseThrow(() -> new RuntimeException("Group not found with id: " + groupId));
@@ -62,6 +80,6 @@ public class RideGroupService {
     }
 
     private RideGroupDTO mapToDTO(RideGroup group) {
-        return new RideGroupDTO(group.getId(), group.getName(), group.getDescription());
+        return new RideGroupDTO(group.getId(), group.getName(), group.getDescription(), group.getInviteCode());
     }
 }

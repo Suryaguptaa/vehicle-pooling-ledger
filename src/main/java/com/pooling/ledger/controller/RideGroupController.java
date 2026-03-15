@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/groups")
-@CrossOrigin(origins = "https://vehicle-pooling-ledger-frontend.vercel.app")
 public class RideGroupController {
 
     @Autowired
@@ -39,6 +38,12 @@ public class RideGroupController {
     @PostMapping("/{id}/members")
     public ResponseEntity<ApiResponse<String>> addMember(@PathVariable Long id, @RequestParam Long residentId) {
         String message = rideGroupService.addMemberToGroup(id, residentId);
+        return ResponseEntity.ok(new ApiResponse<>(true, message, null));
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<ApiResponse<String>> joinByInviteCode(@RequestParam String inviteCode, @RequestParam Long residentId) {
+        String message = rideGroupService.joinByInviteCode(inviteCode, residentId);
         return ResponseEntity.ok(new ApiResponse<>(true, message, null));
     }
 
