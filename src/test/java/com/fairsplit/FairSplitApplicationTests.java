@@ -1,10 +1,10 @@
-package com.pooling.ledger;
+package com.fairsplit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VehiclePoolingLedgerApplicationTests {
+class FairSplitApplicationTests {
 
 	@Test
 	void contextLoads() {
