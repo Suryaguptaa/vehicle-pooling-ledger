@@ -166,28 +166,28 @@
                         <div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
                                 <span>Software & IT</span>
-                                <span style="font-weight: 600;">₹1,250.00</span>
+                                <span style="font-weight: 600;">₹0.00</span>
                             </div>
                             <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
-                                <div style="height: 100%; width: 65%; background: var(--primary); border-radius: 3px;"></div>
+                                <div style="height: 100%; width: 0%; background: var(--primary); border-radius: 3px;"></div>
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
                                 <span>Housing</span>
-                                <span style="font-weight: 600;">₹800.00</span>
+                                <span style="font-weight: 600;">₹0.00</span>
                             </div>
                             <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
-                                <div style="height: 100%; width: 45%; background: var(--success); border-radius: 3px;"></div>
+                                <div style="height: 100%; width: 0%; background: var(--success); border-radius: 3px;"></div>
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.5rem;">
                                 <span>Food & Dining</span>
-                                <span style="font-weight: 600;">₹500.50</span>
+                                <span style="font-weight: 600;">₹0.00</span>
                             </div>
                             <div style="height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;">
-                                <div style="height: 100%; width: 25%; background: var(--danger); border-radius: 3px;"></div>
+                                <div style="height: 100%; width: 0%; background: var(--danger); border-radius: 3px;"></div>
                             </div>
                         </div>
                     </div>
@@ -201,24 +201,8 @@
                         </div>
                     </div>
                     
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--input-bg); border-radius: 8px; border: 1px solid var(--border);">
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">A</div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 0.85rem; font-weight: 600;">Alice Manager</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">owes you</div>
-                            </div>
-                            <div style="font-weight: 600; color: var(--success); font-size: 0.9rem;">₹516.83</div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--input-bg); border-radius: 8px; border: 1px solid var(--border);">
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">B</div>
-                            <div style="flex: 1;">
-                                <div style="font-size: 0.85rem; font-weight: 600;">Bob Developer</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">owes you</div>
-                            </div>
-                            <div style="font-weight: 600; color: var(--success); font-size: 0.9rem;">₹491.83</div>
-                        </div>
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem;">Send Reminders</button>
+                    <div id="pendingSettlementsList" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="text-align:center; padding: 1rem; color: var(--text-muted); font-size: 0.85rem;">No pending settlements</div>
                     </div>
                 </div>
             </div>
@@ -345,6 +329,26 @@
                             </tr>
                         `;
                     }).join('');
+                }
+
+                // --- Render Pending Settlements (Sidebar) ---
+                const pendingContainer = document.getElementById('pendingSettlementsList');
+                if (pendingContainer) {
+                    const oweMeDebts = allDebts.filter(d => d.type === 'owed');
+                    if (oweMeDebts.length === 0) {
+                        pendingContainer.innerHTML = '<div style="text-align:center; padding: 1rem; color: var(--text-muted); font-size: 0.85rem;">No pending settlements</div>';
+                    } else {
+                        pendingContainer.innerHTML = oweMeDebts.slice(0,3).map(d => `
+                            <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--input-bg); border-radius: 8px; border: 1px solid var(--border);">
+                                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem;">${d.name.charAt(0).toUpperCase()}</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 0.85rem; font-weight: 600;">${d.name}</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">owes you</div>
+                                </div>
+                                <div style="font-weight: 600; color: var(--success); font-size: 0.9rem;">₹${d.amount.toFixed(2)}</div>
+                            </div>
+                        `).join('') + '<button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 0.85rem;">Send Reminders</button>';
+                    }
                 }
 
                 // --- Render Recent Activity ---
