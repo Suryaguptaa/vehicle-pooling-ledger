@@ -2,7 +2,7 @@
 
 > A clean, reliable, and modern shared expense management system -- built to fix everything wrong with Splitwise.
 
-**🟢 Live Demo:** [https://fairsplit-lbe9.onrender.com/](https://fairsplit-lbe9.onrender.com/)
+**🟢 Live Demo:** [[https://fairsplit-lbe9.onrender.com/](https://fairsplit-lbe9.onrender.com/)](https://fairsplit-lbe9.onrender.com/)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5-6DB33F?style=flat-square&logo=springboot&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-17-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/Vanilla_JS-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
